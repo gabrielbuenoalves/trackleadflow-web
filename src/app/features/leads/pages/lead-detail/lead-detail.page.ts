@@ -8,25 +8,26 @@ import { Session } from '../../../../core/auth/session';
   standalone: true,
   template: `
     <h1>Lead</h1>
-    <section>
+    <p class="lede">O que a triagem, o WhatsApp e o pagamento já registraram.</p>
+    <section class="record">
       <h2>Triagem</h2>
-      <p>{{ triage }}</p>
+      <pre>{{ triage }}</pre>
     </section>
-    <section>
+    <section class="record">
       <h2>Mensagens</h2>
-      <p>{{ messages }}</p>
+      <pre>{{ messages }}</pre>
     </section>
-    <section>
+    <section class="record">
       <h2>Follow-up</h2>
-      <p>{{ followUp }}</p>
+      <pre>{{ followUp }}</pre>
     </section>
-    <section>
+    <section class="record">
       <h2>Cobranças</h2>
-      <p>{{ charges }}</p>
+      <pre>{{ charges }}</pre>
     </section>
-    <section>
+    <section class="record">
       <h2>Entregas</h2>
-      <p>{{ deliveries }}</p>
+      <pre>{{ deliveries }}</pre>
     </section>
   `,
 })
@@ -39,13 +40,17 @@ export class LeadDetailPage implements OnInit {
 
   constructor(private readonly http: HttpClient, private readonly session: Session, private readonly route: ActivatedRoute) {}
 
+  private show(body: unknown): string {
+    return JSON.stringify(body, null, 2);
+  }
+
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     const headers = new HttpHeaders({ Authorization: 'Bearer ' + this.session.token });
-    this.http.get(this.session.api + '/qualification/leads/' + id, { headers }).subscribe((body) => { this.triage = JSON.stringify(body); });
-    this.http.get(this.session.api + '/whatsapp/leads/' + id + '/messages', { headers }).subscribe((body) => { this.messages = JSON.stringify(body); });
-    this.http.get(this.session.api + '/followup/leads/' + id, { headers }).subscribe((body) => { this.followUp = JSON.stringify(body); });
-    this.http.get(this.session.api + '/payments/leads/' + id + '/charges', { headers }).subscribe((body) => { this.charges = JSON.stringify(body); });
-    this.http.get(this.session.api + '/marketing/leads/' + id + '/deliveries', { headers }).subscribe((body) => { this.deliveries = JSON.stringify(body); });
+    this.http.get(this.session.api + '/qualification/leads/' + id, { headers }).subscribe((body) => { this.triage = this.show(body); });
+    this.http.get(this.session.api + '/whatsapp/leads/' + id + '/messages', { headers }).subscribe((body) => { this.messages = this.show(body); });
+    this.http.get(this.session.api + '/followup/leads/' + id, { headers }).subscribe((body) => { this.followUp = this.show(body); });
+    this.http.get(this.session.api + '/payments/leads/' + id + '/charges', { headers }).subscribe((body) => { this.charges = this.show(body); });
+    this.http.get(this.session.api + '/marketing/leads/' + id + '/deliveries', { headers }).subscribe((body) => { this.deliveries = this.show(body); });
   }
 }

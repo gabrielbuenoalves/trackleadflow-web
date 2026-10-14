@@ -8,13 +8,14 @@ import { Session } from '../../../../core/auth/session';
   standalone: true,
   template: `
     <h1>Entrar</h1>
+    <p class="lede">Use o e-mail da conta do escritório.</p>
     <label for="email">E-mail</label>
     <input id="email" [value]="email" (input)="email = $any($event.target).value" />
     <label for="password">Senha</label>
     <input id="password" type="password" [value]="password" (input)="password = $any($event.target).value" />
     <button type="button" (click)="enter()">Entrar</button>
     @if (error) {
-      <p>{{ error }}</p>
+      <p class="error">{{ error }}</p>
     }
   `,
 })

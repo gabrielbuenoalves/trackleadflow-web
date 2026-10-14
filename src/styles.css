@@ -1,57 +1,257 @@
 :root {
-  color: #1c1917;
-  background: #f6f3ee;
-  font-family: Georgia, "Times New Roman", serif;
+  --tide: #16343c;
+  --foam: #eef4f2;
+  --paper: #ffffff;
+  --mist: #c9dad6;
+  --ink-soft: #4d6662;
+  --signal: #e23d2b;
+  --signal-wash: #ffe8e3;
+  --ready: #0e7c66;
+  --error: #8f2d45;
+  color: var(--tide);
+  background: var(--foam);
+  font-family: "Bricolage Grotesque", "Segoe UI", sans-serif;
+  font-optical-sizing: auto;
 }
 
 body {
   margin: 0;
 }
 
-main {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 24px 16px 48px;
+.shell {
+  display: grid;
+  grid-template-columns: 232px minmax(0, 1fr);
+  min-height: 100vh;
 }
 
-nav {
+.rail {
+  position: sticky;
+  top: 0;
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px 16px;
-  padding: 16px;
-  background: #1c1917;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 2px;
+  box-sizing: border-box;
+  height: 100vh;
+  padding: 28px 18px;
+  background: var(--paper);
+  border-right: 1px solid var(--mist);
 }
 
-nav a {
-  color: #f6f3ee;
+.mark {
+  margin: 0 0 28px;
+  color: var(--tide);
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
   text-decoration: none;
 }
 
-label, input, button, textarea {
-  font: inherit;
+.rail-group {
+  margin: 22px 10px 6px;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+}
+
+.rail a {
+  padding: 8px 10px;
+  border-radius: 10px;
+  color: var(--tide);
+  text-decoration: none;
+}
+
+.rail a.is-here {
+  background: var(--signal-wash);
+  color: var(--signal);
+}
+
+main {
+  max-width: 760px;
+  padding: 56px 48px 96px;
+}
+
+h1 {
+  margin: 0;
+  max-width: 16ch;
+  font-size: 2.6rem;
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  line-height: 1.02;
+}
+
+h2 {
+  margin: 0 0 8px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+.lede {
+  max-width: 36ch;
+  margin: 14px 0 32px;
+  color: var(--ink-soft);
+  font-size: 1.08rem;
+  line-height: 1.45;
 }
 
 label {
   display: block;
-  margin-top: 12px;
+  margin: 18px 0 6px;
+  font-weight: 600;
 }
 
-input, textarea {
-  width: 100%;
+input,
+textarea,
+button {
+  font: inherit;
+}
+
+input,
+textarea {
   box-sizing: border-box;
-  margin-top: 4px;
+  width: 100%;
+  margin: 0;
+  padding: 12px 14px;
+  border: 1px solid var(--mist);
+  border-radius: 12px;
+  background: var(--paper);
+  color: var(--tide);
+}
+
+textarea {
+  min-height: 120px;
+  resize: vertical;
+  line-height: 1.45;
 }
 
 button {
-  margin-top: 16px;
+  margin-top: 22px;
+  padding: 12px 22px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--tide);
+  color: var(--foam);
+  cursor: pointer;
 }
 
-.configured {
-  margin-top: 12px;
+button:hover {
+  background: #0e2429;
 }
 
-@media (max-width: 640px) {
-  nav {
+.queue {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.queue a {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--mist);
+  color: inherit;
+  text-decoration: none;
+}
+
+.queue a:hover .who {
+  color: var(--signal);
+}
+
+.who {
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+.state {
+  color: var(--ink-soft);
+}
+
+.state.is-queued {
+  color: var(--signal);
+}
+
+.record {
+  padding: 4px 0 26px;
+}
+
+.record pre {
+  margin: 0;
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+.configured,
+.saved {
+  margin: 14px 0 0;
+  color: var(--ready);
+}
+
+.error {
+  margin: 14px 0 0;
+  color: var(--error);
+}
+
+:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 3px;
+}
+
+@media (max-width: 720px) {
+  .shell {
+    grid-template-columns: 1fr;
+  }
+
+  .rail {
+    position: sticky;
+    z-index: 2;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    height: auto;
+    padding: 12px 14px;
+    gap: 4px;
+    overflow-x: auto;
+    border-right: 0;
+    border-bottom: 1px solid var(--mist);
+  }
+
+  .mark {
+    flex: 0 0 auto;
+    margin: 0 12px 0 0;
+    line-height: 1.1;
+  }
+
+  .rail a,
+  .rail-group {
+    flex: 0 0 auto;
+  }
+
+  .rail-group {
+    margin: 0 4px 0 10px;
+  }
+
+  main {
+    padding: 28px 16px 72px;
+  }
+
+  h1 {
+    font-size: 2.1rem;
+  }
+
+  .queue a {
+    align-items: flex-start;
     flex-direction: column;
+    gap: 4px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .queue a:hover .who {
+    color: inherit;
   }
 }

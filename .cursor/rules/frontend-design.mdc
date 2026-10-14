@@ -1,0 +1,13 @@
+---
+description: Visual do painel Angular segue a skill frontend-design
+globs: src/**/*.{ts,css,html}
+alwaysApply: false
+---
+
+# Painel
+
+Antes de mudar layout, tipo, cor ou componente visual, leia `.cursor/skills/frontend-design/SKILL.md` e siga o processo dela.
+
+O produto é o painel do Admin e do Especialista. A cara é de produto jovem e atual. A fila, o detalhe do lead e a configuração continuam usáveis no dia a dia. O segredo continua mascarado. Não há botão de proposta nesta tela.
+
+Evite caixa cinza, borda grossa em todo campo e a combinação fundo creme com serifa que a skill marca como visual genérico.
