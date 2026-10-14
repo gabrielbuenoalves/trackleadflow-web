@@ -1,0 +1,57 @@
+:root {
+  color: #1c1917;
+  background: #f6f3ee;
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+body {
+  margin: 0;
+}
+
+main {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  padding: 16px;
+  background: #1c1917;
+}
+
+nav a {
+  color: #f6f3ee;
+  text-decoration: none;
+}
+
+label, input, button, textarea {
+  font: inherit;
+}
+
+label {
+  display: block;
+  margin-top: 12px;
+}
+
+input, textarea {
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 4px;
+}
+
+button {
+  margin-top: 16px;
+}
+
+.configured {
+  margin-top: 12px;
+}
+
+@media (max-width: 640px) {
+  nav {
+    flex-direction: column;
+  }
+}
